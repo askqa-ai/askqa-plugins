@@ -29,7 +29,7 @@ If this succeeds, we're in a git repo. If it fails, we're in Desktop/global mode
 ## Step 3: Determine Config Location
 
 **If in a git repository:**
-- Config location: `.claude/.mcp.json` (project-specific)
+- Config location: `.mcp.json` in the project root (project-specific)
 - This configuration will only apply when working in this repository
 
 **If not in a git repository (Desktop mode):**
@@ -82,9 +82,8 @@ Add or update the `askqa` MCP server entry:
 
 Use the Write tool to save the updated config back to the file.
 
-**For project config (`.claude/.mcp.json`):**
-- Create `.claude/` directory if it doesn't exist
-- Write the config file
+**For project config (`.mcp.json`):**
+- Write the config file to the project root
 
 **For Desktop config:**
 - Write directly to the Desktop config file location
@@ -95,7 +94,7 @@ After writing the config, confirm with the user:
 
 **If project config:**
 ```
-✓ AskQA MCP server configured in .claude/.mcp.json
+✓ AskQA MCP server configured in .mcp.json
 
 The MCP server is now available in this repository. Restart Claude Code to load it.
 
@@ -125,4 +124,4 @@ If any step fails:
 After successful setup, remind the user:
 - They can verify the setup by restarting and running `list_tests`
 - They can update the API key anytime by running this skill again
-- Project configs (`.claude/.mcp.json`) can be committed to git for team sharing (but shouldn't include the API key - use environment variables instead for team setups)
+- Project configs (`.mcp.json`) can be committed to git for team sharing (but shouldn't include the API key - use environment variables instead for team setups)

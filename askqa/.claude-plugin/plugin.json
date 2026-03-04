@@ -1,5 +1,17 @@
 {
   "name": "askqa",
-  "version": "1.0.8",
-  "description": "AskQA skills — set up notifications and monitoring for your websites"
+  "version": "1.0.9",
+  "description": "AskQA skills — set up notifications and monitoring for your websites",
+  "mcpServers": {
+    "askqa": {
+      "command": "node",
+      "args": [
+        "${CLAUDE_PLUGIN_ROOT}/server.js"
+      ],
+      "env": {
+        "AUTOQA_API_URL": "",
+        "AUTOQA_API_KEY": ""
+      }
+    }
+  }
 }
