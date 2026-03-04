@@ -1,0 +1,17 @@
+{
+  "name": "askqa-marketplace",
+  "owner": {
+    "name": "AskQA"
+  },
+  "metadata": {
+    "description": "Official AskQA plugins for Claude Code"
+  },
+  "plugins": [
+    {
+      "name": "askqa",
+      "source": "./askqa",
+      "description": "AskQA skills — set up notifications and monitoring for your websites",
+      "version": "1.0.8"
+    }
+  ]
+}
