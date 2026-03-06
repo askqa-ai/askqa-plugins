@@ -11,7 +11,7 @@
       "name": "askqa",
       "source": "./askqa",
       "description": "AskQA skills — set up notifications and monitoring for your websites",
-      "version": "1.1.0"
+      "version": "1.1.1"
     }
   ]
 }

@@ -21024,10 +21024,11 @@ server.registerTool(
       params: external_exports.record(external_exports.string()).optional().describe("Optional template parameters"),
       code: external_exports.string().optional().describe("Custom Playwright test code. Must define an async function test({ page, step, log, secrets }). Omit if using template_id."),
       secrets: external_exports.record(external_exports.string()).optional().describe("Optional key-value secrets (e.g. { email: '...', password: '...' } or { api_key: '...' }). Encrypted at rest, never returned in API responses."),
-      headers: external_exports.record(external_exports.string()).optional().describe("Optional HTTP headers injected into requests to the target domain (e.g. { 'X-Test-Secret': 'abc' })")
+      headers: external_exports.record(external_exports.string()).optional().describe("Optional HTTP headers injected into requests to the target domain (e.g. { 'X-Test-Secret': 'abc' })"),
+      enable_test_mode: external_exports.boolean().optional().describe("Send X-AskQA-Secret header to the target site, enabling test mode on sites that support it (default: true)")
     }
   },
-  async ({ name, url, template_id, params, code, secrets, headers }) => {
+  async ({ name, url, template_id, params, code, secrets, headers, enable_test_mode }) => {
     try {
       const body = { name, url };
       if (template_id) body.template_id = template_id;
@@ -21035,6 +21036,7 @@ server.registerTool(
       if (code) body.code = code;
       if (secrets) body.secrets = secrets;
       if (headers) body.headers = headers;
+      if (enable_test_mode !== void 0) body.enable_test_mode = enable_test_mode;
       const test = await apiPost("/api/tests/create", body);
       return { content: [{ type: "text", text: JSON.stringify(test, null, 2) }] };
     } catch (err) {
@@ -21203,10 +21205,11 @@ server.registerTool(
       template_id: external_exports.string().optional().describe("Updated template ID"),
       params: external_exports.record(external_exports.string()).optional().describe("Updated template parameters"),
       secrets: external_exports.record(external_exports.string()).nullable().optional().describe("Updated secrets (pass null to clear)"),
-      headers: external_exports.record(external_exports.string()).nullable().optional().describe("Updated HTTP headers (pass null to clear)")
+      headers: external_exports.record(external_exports.string()).nullable().optional().describe("Updated HTTP headers (pass null to clear)"),
+      enable_test_mode: external_exports.boolean().optional().describe("Send X-AskQA-Secret header to the target site, enabling test mode on sites that support it (default: true)")
     }
   },
-  async ({ test_id, name, url, code, template_id, params, secrets, headers }) => {
+  async ({ test_id, name, url, code, template_id, params, secrets, headers, enable_test_mode }) => {
     try {
       const body = {};
       if (name !== void 0) body.name = name;
@@ -21216,6 +21219,7 @@ server.registerTool(
       if (params !== void 0) body.params = params;
       if (secrets !== void 0) body.secrets = secrets;
       if (headers !== void 0) body.headers = headers;
+      if (enable_test_mode !== void 0) body.enable_test_mode = enable_test_mode;
       const test = await apiPatch(`/api/tests/${test_id}`, body);
       return { content: [{ type: "text", text: JSON.stringify(test, null, 2) }] };
     } catch (err) {
